@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acompe.Mapper.UserMapper">
+    <select id="findAll" resultType="user">
+        select * from user
+    </select>
+
+    <select id="findById" resultType="user">
+        select * from user where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from user where id = #{id}
+    </delete>
+
+    <insert id="add" parameterType="user" useGeneratedKeys="true" keyProperty="id" >
+        insert into user(userName, passWord, name)
+        value (#{userName},#{passWord},#{name})
+    </insert>
+
+    <update id="update" parameterType="user">
+        update user
+        <set>
+            <if test="userName != null">userName=#{userName},</if>
+            <if test="passWord != null">passWord=#{passWord},</if>
+            <if test="name != null">name=#{name},</if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>
